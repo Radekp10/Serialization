@@ -45,14 +45,14 @@ public:
     }
 
     string& pobierznazwe() { return nazwa; }        //funkcje zwracajace dane skladowe
-	string& pobierzfirme() { return firma; }
-	double  pobierzcene() { return cena;}
-	int pobierzdostepne() { return dostepne;}
+    string& pobierzfirme() { return firma; }
+    double  pobierzcene() { return cena;}
+    int pobierzdostepne() { return dostepne;}
 
-	void ustawnazwe(const string& n) { nazwa = n; } //funkcje ustawiajace dane skladowe
-	void ustawfirme(const string& f) {firma = f; }
-	void ustawcene (double c) {cena = c;}
-	void ustawdostepne (int d) {dostepne = d;}
+    void ustawnazwe(const string& n) { nazwa = n; } //funkcje ustawiajace dane skladowe
+    void ustawfirme(const string& f) {firma = f; }
+    void ustawcene (double c) {cena = c;}
+    void ustawdostepne (int d) {dostepne = d;}
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,10 +105,10 @@ private:
     string nazwa_sklepu;                                    //pole z nazwa sklepu
     deque<Produkt *> produkty;                              //kontener (lista) przechowujacy produkty dostepne w sklepie
 
-	friend class boost::serialization::access;              //metoda serializacji ma dostêp do atrybutów prywatnych
+    friend class boost::serialization::access;              //metoda serializacji ma dostêp do atrybutów prywatnych
 
-	template <class Archive>                                //wzorzec
-	void serialize(Archive& ar, const unsigned int wersja)	//serializacji
+    template <class Archive>                                //wzorzec
+    void serialize(Archive& ar, const unsigned int wersja)	//serializacji
     {
 		ar & nazwa_sklepu;		                            //dodawanie poszczególnych pol do archiwum
 		ar & produkty;			                            //poprzez u¿ycie operatora '&' na archiwum
@@ -174,28 +174,28 @@ void wczytaj_sklep(Sklep &s, const char* filename)          //oczytywanie stanu 
 
 int main()                                                  //testowanie serializacji obiektow
 {
-	const char* filename = "produkty.txt";                  //plik tekstowy do ktorego beda zapisywane dane
+    const char* filename = "produkty.txt";                  //plik tekstowy do ktorego beda zapisywane dane
 
     Produkt p1("Sok jablkowy", "Hortex", 4.99, 200);        //utworzenie obiektow - produkty
-	Produkt p2("Herbata mrozona", "Nestea", 3.20, 100);
+    Produkt p2("Herbata mrozona", "Nestea", 3.20, 100);
     Produkt p3("Woda mineralna", "Zywiec Zdroj", 2.59,500);
 
     Produkt * pp1 = &p1;			                        //utworzenie wskaznikow na obiekty
-	Produkt * pp2 = &p2;
-	Produkt * pp3 = &p3;
+    Produkt * pp2 = &p2;
+    Produkt * pp3 = &p3;
 
-	Sklep s1("Sklep spozywczy Obiekt");                     //utworzenie obiektu sklep
-	s1.dodajprodukt(pp1);                                   //dodanie produktow do sklepu
-	s1.dodajprodukt(pp2);
-	s1.dodajprodukt(pp3);
+    Sklep s1("Sklep spozywczy Obiekt");                     //utworzenie obiektu sklep
+    s1.dodajprodukt(pp1);                                   //dodanie produktow do sklepu
+    s1.dodajprodukt(pp2);
+    s1.dodajprodukt(pp3);
 
     zapisz_sklep(s1, filename);                         //zapis do archiwum tekstowego
 
-	Sklep s2;                                           //utworzenie nowego obiektu sklep
+    Sklep s2;                                           //utworzenie nowego obiektu sklep
 
     wczytaj_sklep(s2, filename);                        //odczyt z archiwum tekstowego i zapisanie danych do nowo utworzonego obiektu
 
-	s2.przeglad_stanu_sklepu();                         //wyswietlenie produktow dostepnych w sklepie s2
+    s2.przeglad_stanu_sklepu();                         //wyswietlenie produktow dostepnych w sklepie s2
                                                         //jesli odczyt z archiwum byl poprawny to powinnismy otrzymac te same produkty co byly w sklepie s1
-	return 0;
+    return 0;
 }
