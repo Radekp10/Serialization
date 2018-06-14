@@ -107,7 +107,7 @@ private:
 
 	friend class boost::serialization::access;              //metoda serializacji ma dostêp do atrybutów prywatnych
 
-	template <class Archive>								//wzorzec
+	template <class Archive>                                //wzorzec
 	void serialize(Archive& ar, const unsigned int wersja)	//serializacji
     {
 		ar & nazwa_sklepu;		                            //dodawanie poszczególnych pol do archiwum
